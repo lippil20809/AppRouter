@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import ErrorInterceptor from "../../hocs/ErrorInterceptor";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import ErrorInterceptor from '../../hocs/ErrorInterceptor';
 
-const UserWrapper = styled("div")`
+const UserWrapper = styled('div')`
   flex: 1 0 calc(25% - 8px);
   display: flex;
   flex-direction: column;

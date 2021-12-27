@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Photo from "../containers/Photos";
+import Photo from '../containers/Photos';
 
 const PhotoPage = () => {
   return <Photo />;

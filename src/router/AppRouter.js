@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-import PostsPage from "../pages/Posts";
-import PostDetailPage from "../pages/PostDetail";
-import TodosPage from "../pages/Todos";
-import TodoDetailPage from "../pages/TodoDetail";
-import UsersPage from "../pages/Users";
-import UserDetailPage from "../pages/UsersDetail";
-import AlbumsPage from "../pages/Albums";
-import AlbumDetailPage from '../pages/AlbumDetail'
-import PhotoPage from "../pages/Photos";
-import PhotoDetailPage from "../pages/PhotoDetail";
+import PostsPage from '../pages/Posts';
+import PostDetailPage from '../pages/PostDetail';
+import TodosPage from '../pages/Todos';
+import TodoDetailPage from '../pages/TodoDetail';
+import UsersPage from '../pages/Users';
+import UserDetailPage from '../pages/UsersDetail';
+import AlbumsPage from '../pages/Albums';
+import AlbumDetailPage from '../pages/AlbumDetail';
+import PhotoPage from '../pages/Photos';
+import PhotoDetailPage from '../pages/PhotoDetail';
 
 const AppRouter = () => {
   return (

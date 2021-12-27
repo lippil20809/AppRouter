@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import UserDetail from "../containers/UserDetail";
+import UserDetail from '../containers/UserDetail';
 
 const UserDetailPage = () => {
   return <UserDetail />;

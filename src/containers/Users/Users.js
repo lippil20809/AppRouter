@@ -22,7 +22,7 @@ const Users = () => {
     <UsersWrapper>
       {loading && 'loading...'}
       {error && 'some error...'}
-      {!loading && !error  && users?.map(user => <User key={user.id} {...user} />)}
+      {!loading && !error && users?.map(user => <User key={user.id} {...user} />)}
     </UsersWrapper>
   );
 };

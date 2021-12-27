@@ -1,12 +1,12 @@
-import React from "react";
-import { useCallback } from "react";
-import styled from "styled-components";
-import { Link , useParams} from "react-router-dom";
-import { getAlbum } from '../../api/albums'
-import { getUser } from "../../api/users";
-import useRequest from "../../hooks/useRequest";
+import React from 'react';
+import { useCallback } from 'react';
+import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+import { getAlbum } from '../../api/albums';
+import { getUser } from '../../api/users';
+import useRequest from '../../hooks/useRequest';
 
-const UserDetailWrapper = styled("section")`
+const UserDetailWrapper = styled('section')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -19,20 +19,20 @@ const UserDetailWrapper = styled("section")`
 
 const UserDetail = () => {
   const params = useParams();
-  const requestUser =  useCallback (() => getUser(params.id),[params.id])
+  const requestUser = useCallback(() => getUser(params.id), [params.id]);
   const { data: user, loading, error } = useRequest(requestUser);
 
-  const requestAlbumId =  useCallback (() => {
-    if(!user?.id) return Promise.resolve()
-    return getAlbum(user?.id)
-  },[user?.id])
-  const { data: album} = useRequest(requestAlbumId);
+  const requestAlbumId = useCallback(() => {
+    if (!user?.id) return Promise.resolve();
+    return getAlbum(user?.id);
+  }, [user?.id]);
+  const { data: album } = useRequest(requestAlbumId);
 
   return (
     <UserDetailWrapper>
       <Link to="/users">Users</Link>
-      {loading && "loading..."}
-      {error && "some error..."}
+      {loading && 'loading...'}
+      {error && 'some error...'}
       {user && (
         <>
           <h6>
@@ -48,7 +48,7 @@ const UserDetail = () => {
           </ul>
         </>
       )}
-      <Link to={`/albums/${user?.id}`}>{album?.title}</Link> 
+      <Link to={`/albums/${user?.id}`}>{album?.title}</Link>
     </UserDetailWrapper>
   );
 };

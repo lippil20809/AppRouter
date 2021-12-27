@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import ErrorInterceptor from "../../hocs/ErrorInterceptor";
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import ErrorInterceptor from '../../hocs/ErrorInterceptor';
 
-const AlbumWrapper = styled("div")`
+const AlbumWrapper = styled('div')`
   flex: 1 0 calc(25% - 8px);
   display: flex;
   flex-direction: column;
@@ -36,8 +36,6 @@ const Album = ({ id, title }) => {
     navigate(`/albums/${id}`);
   };
 
-
-
   return (
     <AlbumWrapper>
       <h6>{title}</h6>
@@ -46,11 +44,10 @@ const Album = ({ id, title }) => {
   );
 };
 
-
 export default ErrorInterceptor(Album);
 
 Album.protoTypes = {
-    id: PropTypes.number.isRequired,
-    userId: PropTypes.number.isRequired,
-    title:PropTypes.string.isRequired,
-  }
+  id: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+};

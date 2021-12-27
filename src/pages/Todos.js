@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import Todos from "../containers/Todos";
+import Todos from '../containers/Todos';
 
 const TodosPage = () => {
   return <Todos />;

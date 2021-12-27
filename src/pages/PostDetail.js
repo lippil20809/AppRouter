@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import PostDetail from "../containers/PostDetail";
+import PostDetail from '../containers/PostDetail';
 
 const PostDetailPage = () => {
   return <PostDetail />;

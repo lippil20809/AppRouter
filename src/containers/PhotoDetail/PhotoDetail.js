@@ -1,12 +1,11 @@
-import React , {useCallback } from "react";
+import React, { useCallback } from 'react';
 
-import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import { getPhoto } from "../../api/photos";
-import useRequest from "../../hooks/useRequest";
+import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+import { getPhoto } from '../../api/photos';
+import useRequest from '../../hooks/useRequest';
 
-
-const PhotoDetailWrapper = styled("section")`
+const PhotoDetailWrapper = styled('section')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -17,30 +16,25 @@ const PhotoDetailWrapper = styled("section")`
   box-sizing: border-box;
 
   > img {
-      width: 100px;
-      height: 100px;
+    width: 100px;
+    height: 100px;
   }
 `;
 
 const PhotoDetail = () => {
-
   const params = useParams();
-  const requestPost =  useCallback (() => getPhoto(params.id),[params.id])
+  const requestPost = useCallback(() => getPhoto(params.id), [params.id]);
   const { data: photo, loading, error } = useRequest(requestPost);
 
-
- 
-
-  
   return (
     <PhotoDetailWrapper>
       <Link to="/photos">Photos</Link>
-      {loading && "loading..."}
-      {error && "some error..."}
+      {loading && 'loading...'}
+      {error && 'some error...'}
       {photo && (
         <>
           <h1>{photo.title}</h1>
-          <img src={photo.url}/>
+          <img src={photo.url} />
         </>
       )}
     </PhotoDetailWrapper>

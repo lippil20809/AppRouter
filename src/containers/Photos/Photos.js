@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { getPhotos } from "../../api/photos";
-import Photo from "../../components/Photo/Photo";
-import useRequest from "../../hooks/useRequest";
+import { getPhotos } from '../../api/photos';
+import Photo from '../../components/Photo/Photo';
+import useRequest from '../../hooks/useRequest';
 
-const PhotosWrapper = styled("section")`
+const PhotosWrapper = styled('section')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -22,12 +22,9 @@ const Photos = () => {
 
   return (
     <PhotosWrapper>
-      {loading && "loading..."}
-      {error && "some error..."}
-      {!loading &&
-        !error &&
-        photos &&
-        photos.map((photo) => <Photo key={photo.id} {...photo} />)}
+      {loading && 'loading...'}
+      {error && 'some error...'}
+      {!loading && !error && photos && photos.map(photo => <Photo key={photo.id} {...photo} />)}
     </PhotosWrapper>
   );
 };

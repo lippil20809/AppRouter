@@ -1,13 +1,12 @@
-import React , {useCallback } from "react";
+import React, { useCallback } from 'react';
 
-import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import { getUser } from "../../api/users";
-import { getPost, getPostComments } from "../../api/posts";
-import useRequest from "../../hooks/useRequest";
+import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+import { getUser } from '../../api/users';
+import { getPost, getPostComments } from '../../api/posts';
+import useRequest from '../../hooks/useRequest';
 
-
-const PostDetailWrapper = styled("section")`
+const PostDetailWrapper = styled('section')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -19,25 +18,22 @@ const PostDetailWrapper = styled("section")`
 `;
 
 const PostDetail = () => {
-
   const params = useParams();
-  const requestPost =  useCallback (() => getPost(params.id),[params.id])
-  const requestComments =  useCallback (() => getPostComments(params.id),[params.id])
+  const requestPost = useCallback(() => getPost(params.id), [params.id]);
+  const requestComments = useCallback(() => getPostComments(params.id), [params.id]);
   const { data: post, loading, error } = useRequest(requestPost);
   const { data: comments } = useRequest(requestComments);
-  const requestUsersID =  useCallback (() => {
-    if(!post?.userId) return Promise.resolve()
-    return getUser(post?.userId)
-  },[post?.userId])
-  const { data: user} = useRequest(requestUsersID);
- 
+  const requestUsersID = useCallback(() => {
+    if (!post?.userId) return Promise.resolve();
+    return getUser(post?.userId);
+  }, [post?.userId]);
+  const { data: user } = useRequest(requestUsersID);
 
-  
   return (
     <PostDetailWrapper>
       <Link to="/posts">Posts</Link>
-      {loading && "loading..."}
-      {error && "some error..."}
+      {loading && 'loading...'}
+      {error && 'some error...'}
       {post && (
         <>
           <h1>{post.title}</h1>
@@ -46,7 +42,7 @@ const PostDetail = () => {
       )}
       <Link to={`/users/${post?.userId}`}>{user?.username}</Link>
       {comments &&
-        comments.map((todo) => (
+        comments.map(todo => (
           <div key={todo.id}>
             <ul>
               <li>{todo.name}</li>

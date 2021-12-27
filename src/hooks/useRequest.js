@@ -1,9 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-
-const useRequest = (request) => {
-  
-
+const useRequest = request => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -11,8 +8,8 @@ const useRequest = (request) => {
   useEffect(() => {
     setLoading(true);
     request()
-      .then((data) => setData(data))
-      .catch((error) => setError(error))
+      .then(data => setData(data))
+      .catch(error => setError(error))
       .finally(() => setLoading(false));
   }, [request]);
 

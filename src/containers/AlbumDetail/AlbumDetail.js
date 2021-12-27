@@ -1,13 +1,12 @@
-import React , {useCallback } from "react";
+import React, { useCallback } from 'react';
 
-import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
-import { getAlbum } from "../../api/albums";
-import { getPhoto } from'../../api/photos'
-import useRequest from "../../hooks/useRequest";
+import styled from 'styled-components';
+import { Link, useParams } from 'react-router-dom';
+import { getAlbum } from '../../api/albums';
+import { getPhoto } from '../../api/photos';
+import useRequest from '../../hooks/useRequest';
 
-
-const AlbumDetailWrapper = styled("section")`
+const AlbumDetailWrapper = styled('section')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -19,35 +18,29 @@ const AlbumDetailWrapper = styled("section")`
 `;
 
 const AlbumDetail = () => {
-
   const params = useParams();
-  const requestPost =  useCallback (() => getAlbum(params.id),[params.id])
+  const requestPost = useCallback(() => getAlbum(params.id), [params.id]);
   const { data: albums, loading, error } = useRequest(requestPost);
 
-  const requestAlbumId =  useCallback (() => {
-    if(!albums?.userId) return Promise.resolve()
-    return getPhoto(albums?.userId)
-  },[albums?.userId])
-  const { data: photo} = useRequest(requestAlbumId);
+  const requestAlbumId = useCallback(() => {
+    if (!albums?.userId) return Promise.resolve();
+    return getPhoto(albums?.userId);
+  }, [albums?.userId]);
+  const { data: photo } = useRequest(requestAlbumId);
 
- 
-
-  
   return (
     <AlbumDetailWrapper>
       <Link to="/albums">Albums</Link>
-      {loading && "loading..."}
-      {error && "some error..."}
+      {loading && 'loading...'}
+      {error && 'some error...'}
       {albums && (
         <>
           <h1>{albums.title}</h1>
         </>
       )}
-     <Link to={`/photos/${albums?.userId}`}>{photo?.url}</Link> 
-     
+      <Link to={`/photos/${albums?.userId}`}>{photo?.url}</Link>
     </AlbumDetailWrapper>
   );
 };
-//<Link to={`/photos/${albums?.albumId}`}>{photo?.id}</Link>
 
 export default AlbumDetail;

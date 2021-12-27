@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { getPosts } from "../../api/posts";
-import Post from "../../components/Post";
-import useRequest from "../../hooks/useRequest";
+import { getPosts } from '../../api/posts';
+import Post from '../../components/Post';
+import useRequest from '../../hooks/useRequest';
 
-const PostsWrapper = styled("section")`
+const PostsWrapper = styled('section')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -22,12 +22,9 @@ const Posts = () => {
 
   return (
     <PostsWrapper>
-      {loading && "loading..."}
-      {error && "some error..."}
-      {!loading &&
-        !error &&
-        posts &&
-        posts.map((post) => <Post key={post.id} {...post} />)}
+      {loading && 'loading...'}
+      {error && 'some error...'}
+      {!loading && !error && posts && posts.map(post => <Post key={post.id} {...post} />)}
     </PostsWrapper>
   );
 };

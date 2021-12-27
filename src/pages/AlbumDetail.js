@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import AlbumDetail from "../containers/AlbumDetail";
+import AlbumDetail from '../containers/AlbumDetail';
 
 const AlbumDetailPage = () => {
   return <AlbumDetail />;

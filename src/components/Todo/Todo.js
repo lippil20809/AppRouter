@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import ErrorInterceptor from "../../hocs/ErrorInterceptor";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import ErrorInterceptor from '../../hocs/ErrorInterceptor';
 
-const TodosWrapper = styled("div")`
+const TodosWrapper = styled('div')`
   flex: 1 0 calc(25% - 8px);
   display: flex;
   flex-direction: column;
@@ -41,11 +41,7 @@ const Todo = ({ id, title, completed }) => {
   return (
     <TodosWrapper>
       <h6>{title}</h6>
-      <input
-        type="checkbox"
-        checked={completed}
-        onChange={() => setCompleted(!completeds)}
-      />
+      <input type="checkbox" checked={completed} onChange={() => setCompleted(!completeds)} />
       <button onClick={handleClick}>detail</button>
     </TodosWrapper>
   );

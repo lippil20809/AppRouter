@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import ErrorInterceptor from "../../hocs/ErrorInterceptor";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import ErrorInterceptor from '../../hocs/ErrorInterceptor';
 
-const PhotoWrapper = styled("div")`
+const PhotoWrapper = styled('div')`
   flex: 1 0 calc(33% - 8px);
   display: flex;
   flex-direction: column;
@@ -24,8 +24,8 @@ const PhotoWrapper = styled("div")`
   }
 
   > img {
-      width: 100px;
-      height: 100px;
+    width: 100px;
+    height: 100px;
   }
 
   > button {
@@ -41,17 +41,13 @@ const Photo = ({ id, title, url }) => {
     navigate(`/photos/${id}`);
   };
 
-
-
   return (
     <PhotoWrapper>
       <h6>{title}</h6>
-      <img src={url}/>
+      <img src={url} />
       <button onClick={handleClick}>detail</button>
     </PhotoWrapper>
   );
 };
 
-
 export default ErrorInterceptor(Photo);
-

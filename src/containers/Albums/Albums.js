@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { getAlbums } from "../../api/albums";
-import Album from "../../components/Album";
-import useRequest from "../../hooks/useRequest";
+import { getAlbums } from '../../api/albums';
+import Album from '../../components/Album';
+import useRequest from '../../hooks/useRequest';
 
-const AlbumsWrapper = styled("section")`
+const AlbumsWrapper = styled('section')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -22,12 +22,9 @@ const Albums = () => {
 
   return (
     <AlbumsWrapper>
-      {loading && "loading..."}
-      {error && "some error..."}
-      {!loading &&
-        !error &&
-        albums &&
-        albums.map((album) => <Album key={album.id} {...album} />)}
+      {loading && 'loading...'}
+      {error && 'some error...'}
+      {!loading && !error && albums && albums.map(album => <Album key={album.id} {...album} />)}
     </AlbumsWrapper>
   );
 };
