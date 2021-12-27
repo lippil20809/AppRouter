@@ -1,7 +1,8 @@
 import React from "react";
-
+import PropTypes from "prop-types";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import ErrorInterceptor from "../../hocs/ErrorInterceptor";
 
 const PostWrapper = styled("div")`
   flex: 1 0 calc(25% - 8px);
@@ -41,6 +42,8 @@ const Post = ({ id, title, body }) => {
     navigate(`/posts/${id}`);
   };
 
+
+
   return (
     <PostWrapper>
       <h6>{title}</h6>
@@ -50,4 +53,12 @@ const Post = ({ id, title, body }) => {
   );
 };
 
-export default Post;
+
+export default ErrorInterceptor(Post);
+
+Post.protoTypes = {
+  id: PropTypes.number.isRequired,
+  userId: PropTypes.number.isRequired,
+  title:PropTypes.string.isRequired,
+  body:PropTypes.string.isRequired,
+}

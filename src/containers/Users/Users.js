@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from 'react';
+import styled from 'styled-components';
+import { getUsers } from '../../api/users';
+import User from '../../components/User';
+import useRequest from '../../hooks/useRequest';
 
-import styled from "styled-components";
-
-import { getUsers } from "../../api/users";
-import User from "../../components/User";
-
-const UsersWrapper = styled("section")`
+const UsersWrapper = styled('section')`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -17,26 +16,13 @@ const UsersWrapper = styled("section")`
 `;
 
 const Users = () => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-
-    getUsers()
-      .then((users) => setUsers(users))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
+  const { data: users, loading, error } = useRequest(getUsers);
 
   return (
     <UsersWrapper>
-      {loading && "loading..."}
-      {error && "some error..."}
-      {!loading &&
-        !error &&
-        users.map((user) => <User key={user.id} {...user} />)}
+      {loading && 'loading...'}
+      {error && 'some error...'}
+      {!loading && !error  && users?.map(user => <User key={user.id} {...user} />)}
     </UsersWrapper>
   );
 };

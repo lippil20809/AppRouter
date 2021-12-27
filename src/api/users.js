@@ -9,9 +9,9 @@ export const getUsers = async () => {
 };
 
 export const getUser = async (id) => {
-    const { data } = await axios.get(
-      `https://jsonplaceholder.typicode.com/users/${id}`
-    );
-  
-    return data;
-  };
+  const { data } = await axios.get(
+    `https://jsonplaceholder.typicode.com/users/${id}`
+  );
+
+  return data;
+};

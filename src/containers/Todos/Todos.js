@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import styled from "styled-components";
 
 import { getTodos } from "../../api/todos";
 import Todo from "../../components/Todo";
+import useRequest from "../../hooks/useRequest";
 
 const TodosWrapper = styled("section")`
   display: flex;
@@ -17,18 +18,7 @@ const TodosWrapper = styled("section")`
 `;
 
 const Todos = () => {
-  const [todos, setTodos] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-
-    getTodos()
-      .then((todos) => setTodos(todos))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
+  const { data: todos, loading, error } = useRequest(getTodos);
 
   return (
     <TodosWrapper>
@@ -36,6 +26,7 @@ const Todos = () => {
       {error && "some error..."}
       {!loading &&
         !error &&
+        todos &&
         todos.map((todo) => <Todo key={todo.id} {...todo} />)}
     </TodosWrapper>
   );

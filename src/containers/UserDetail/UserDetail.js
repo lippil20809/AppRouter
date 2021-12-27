@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-
+import React from "react";
+import { useCallback } from "react";
 import styled from "styled-components";
-import { useParams, Link } from "react-router-dom";
-
+import { Link , useParams} from "react-router-dom";
+import { getAlbum } from '../../api/albums'
 import { getUser } from "../../api/users";
+import useRequest from "../../hooks/useRequest";
 
 const UserDetailWrapper = styled("section")`
   display: flex;
@@ -18,41 +19,36 @@ const UserDetailWrapper = styled("section")`
 
 const UserDetail = () => {
   const params = useParams();
+  const requestUser =  useCallback (() => getUser(params.id),[params.id])
+  const { data: user, loading, error } = useRequest(requestUser);
 
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  
-
-  useEffect(() => {
-    setLoading(true);
-
-    getUser(params.id)
-      .then((user) => setUser(user))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, [params.id]);
-
+  const requestAlbumId =  useCallback (() => {
+    if(!user?.id) return Promise.resolve()
+    return getAlbum(user?.id)
+  },[user?.id])
+  const { data: album} = useRequest(requestAlbumId);
 
   return (
-    
     <UserDetailWrapper>
-       <Link to="users">Users</Link>
+      <Link to="/users">Users</Link>
       {loading && "loading..."}
       {error && "some error..."}
       {user && (
         <>
-          <h6>{user.name}{user.username}</h6>
-      <ul>
-          <li>email:{user.email}</li>
-          <li>street:{user.street}</li>
-          <li>suite:{user.suite}</li>
-          <li>city:{user.city}</li>
-          <li>phone:{user.phone}</li>
-          <li>website:{user.website}</li>
-      </ul>
+          <h6>
+            {user.name} {user.username}
+          </h6>
+          <ul>
+            <li>email: {user.email}</li>
+            <li>street: {user.street}</li>
+            <li>suite: {user.suite}</li>
+            <li>city: {user.city}</li>
+            <li>phone: {user.phone}</li>
+            <li>website: {user.website}</li>
+          </ul>
         </>
       )}
+      <Link to={`/albums/${user?.id}`}>{album?.title}</Link> 
     </UserDetailWrapper>
   );
 };

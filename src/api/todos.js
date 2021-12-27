@@ -9,9 +9,9 @@ export const getTodos = async () => {
 };
 
 export const getTodo = async (id) => {
-    const { data } = await axios.get(
-      `https://jsonplaceholder.typicode.com/todos/${id}`
-    );
-  
-    return data;
-  };
+  const { data } = await axios.get(
+    `https://jsonplaceholder.typicode.com/todos/${id}`
+  );
+
+  return data;
+};

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import styled from "styled-components";
 
 import { getPosts } from "../../api/posts";
 import Post from "../../components/Post";
+import useRequest from "../../hooks/useRequest";
 
 const PostsWrapper = styled("section")`
   display: flex;
@@ -17,18 +18,7 @@ const PostsWrapper = styled("section")`
 `;
 
 const Posts = () => {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-
-    getPosts()
-      .then((posts) => setPosts(posts))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-  }, []);
+  const { data: posts, loading, error } = useRequest(getPosts);
 
   return (
     <PostsWrapper>
@@ -36,6 +26,7 @@ const Posts = () => {
       {error && "some error..."}
       {!loading &&
         !error &&
+        posts &&
         posts.map((post) => <Post key={post.id} {...post} />)}
     </PostsWrapper>
   );

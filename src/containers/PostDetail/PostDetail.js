@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React , {useCallback } from "react";
 
 import styled from "styled-components";
-import { useParams, Link } from "react-router-dom";
-
+import { Link, useParams } from "react-router-dom";
+import { getUser } from "../../api/users";
 import { getPost, getPostComments } from "../../api/posts";
+import useRequest from "../../hooks/useRequest";
+
 
 const PostDetailWrapper = styled("section")`
   display: flex;
@@ -17,33 +19,23 @@ const PostDetailWrapper = styled("section")`
 `;
 
 const PostDetail = () => {
+
   const params = useParams();
+  const requestPost =  useCallback (() => getPost(params.id),[params.id])
+  const requestComments =  useCallback (() => getPostComments(params.id),[params.id])
+  const { data: post, loading, error } = useRequest(requestPost);
+  const { data: comments } = useRequest(requestComments);
+  const requestUsersID =  useCallback (() => {
+    if(!post?.userId) return Promise.resolve()
+    return getUser(post?.userId)
+  },[post?.userId])
+  const { data: user} = useRequest(requestUsersID);
+ 
 
-  const [post, setPost] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [comments, setComments] = useState([]);
-
-  useEffect(() => {
-    setLoading(true);
-
-    getPost(params.id)
-      .then((post) => setPost(post))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-
-      getPostComments(params.id)
-      .then((comments) => setComments(comments))
-      .catch(() => setError(true))
-      .finally(() => setLoading(false));
-
-  }, [params.id]);
-
-
+  
   return (
-    
     <PostDetailWrapper>
-       <Link to="posts">Posts</Link>
+      <Link to="/posts">Posts</Link>
       {loading && "loading..."}
       {error && "some error..."}
       {post && (
@@ -52,19 +44,17 @@ const PostDetail = () => {
           <p>{post.body}</p>
         </>
       )}
-      {comments.map((todo) => 
+      <Link to={`/users/${post?.userId}`}>{user?.username}</Link>
+      {comments &&
+        comments.map((todo) => (
           <div key={todo.id}>
-          <ul>
-            <li>{todo.name}</li>
-            <li>{todo.email}</li>
-            <li>{todo.body}</li>
-          </ul>
+            <ul>
+              <li>{todo.name}</li>
+              <li>{todo.email}</li>
+              <li>{todo.body}</li>
+            </ul>
           </div>
-        )
-      }
-      
-    
-
+        ))}
     </PostDetailWrapper>
   );
 };

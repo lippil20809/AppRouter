@@ -45,6 +45,12 @@ const Header = () => {
         <NavItem active={location.pathname.includes("users")}>
           <Link to="users">Users</Link>
         </NavItem>
+        <NavItem active={location.pathname.includes("albums")}>
+          <Link to="albums">Albums</Link>
+        </NavItem>
+        <NavItem active={location.pathname.includes("photos")}>
+          <Link to="photos">Photos</Link>
+        </NavItem>
       </ul>
     </Navigation>
   );
