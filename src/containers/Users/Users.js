@@ -1,8 +1,11 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
-import { getUsers } from '../../api/users';
+import * as Statuses from "../../store/statuses";
+import {getSliceUsers,getUsers} from '../../store/users'
+//import { getUsers } from '../../api/users';
 import User from '../../components/User';
-import useRequest from '../../hooks/useRequest';
+//import useRequest from '../../hooks/useRequest';
 
 const UsersWrapper = styled('section')`
   display: flex;
@@ -16,15 +19,31 @@ const UsersWrapper = styled('section')`
 `;
 
 const Users = () => {
-  const { data: users, loading, error } = useRequest(getUsers);
+  const dispatch = useDispatch();
+  const {users, usersRequestStatus } = useSelector(getSliceUsers);
 
+  useEffect(() => {
+    dispatch(getUsers());
+  }, [dispatch]);
   return (
     <UsersWrapper>
-      {loading && 'loading...'}
-      {error && 'some error...'}
-      {!loading && !error && users?.map(user => <User key={user.id} {...user} />)}
+       {usersRequestStatus === Statuses.PENDING && "loading..."}
+      {usersRequestStatus === Statuses.FAILURE && "some error..."}
+      {users?.map(user => <User key={user.id} {...user} />)}
     </UsersWrapper>
   );
 };
+
+// const Users = () => {
+//   const { data: users, loading, error } = useRequest(getUsers);
+
+//   return (
+//     <UsersWrapper>
+//       {loading && 'loading...'}
+//       {error && 'some error...'}
+//       {!loading && !error && users?.map(user => <User key={user.id} {...user} />)}
+//     </UsersWrapper>
+//   );
+// };
 
 export default Users;

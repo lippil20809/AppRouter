@@ -1,7 +1,8 @@
 import React from 'react';
-
+import Button from '../Button';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useLocales } from "../../providers/LocalesProvider";
 import ErrorInterceptor from '../../hocs/ErrorInterceptor';
 
 const UserWrapper = styled('div')`
@@ -13,7 +14,7 @@ const UserWrapper = styled('div')`
   box-sizing: border-box;
   padding: 8px;
   margin: 4px;
-
+  color: ${(props) => props.theme.color.main};
   > h6 {
     font-size: 16px;
     font-weight: 600;
@@ -27,6 +28,7 @@ const UserWrapper = styled('div')`
     margin-top: auto;
     font-size: 14px;
     font-weight: 300;
+    
   }
 
   > button {
@@ -38,7 +40,7 @@ const UserWrapper = styled('div')`
 const User = ({ id, name, username, email, address, phone, website }) => {
   const { street, suite, city } = address;
   const navigate = useNavigate();
-
+  const {trans} = useLocales()
   const handleClick = () => {
     navigate(`/users/${id}`);
   };
@@ -50,15 +52,15 @@ const User = ({ id, name, username, email, address, phone, website }) => {
         {username}
       </h6>
       <ul>
-        <li>email:{email}</li>
-        <li>street:{street}</li>
-        <li>suite:{suite}</li>
-        <li>city:{city}</li>
-        <li>phone:{phone}</li>
-        <li>website:{website}</li>
+      <li>{trans.email}: {email}</li>
+            <li>{trans.street}: {street}</li>
+            <li>{trans.suite}: {suite}</li>
+            <li>{trans.city}: {city}</li>
+            <li>{trans.phone}: {phone}</li>
+            <li>{trans.website}: {website}</li>
       </ul>
 
-      <button onClick={handleClick}>detail</button>
+      <Button onClick={handleClick}>{trans.details}</Button>
     </UserWrapper>
   );
 };

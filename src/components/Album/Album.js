@@ -1,8 +1,10 @@
 import React from 'react';
+import Button from '../Button'
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import ErrorInterceptor from '../../hocs/ErrorInterceptor';
+import { useLocales } from "../../providers/LocalesProvider";
 
 const AlbumWrapper = styled('div')`
   flex: 1 0 calc(25% - 8px);
@@ -13,6 +15,7 @@ const AlbumWrapper = styled('div')`
   box-sizing: border-box;
   padding: 8px;
   margin: 4px;
+  color: ${(props) => props.theme.color.main};
 
   > h6 {
     font-size: 16px;
@@ -31,7 +34,7 @@ const AlbumWrapper = styled('div')`
 
 const Album = ({ id, title }) => {
   const navigate = useNavigate();
-
+  const {trans} = useLocales()
   const handleClick = () => {
     navigate(`/albums/${id}`);
   };
@@ -39,7 +42,7 @@ const Album = ({ id, title }) => {
   return (
     <AlbumWrapper>
       <h6>{title}</h6>
-      <button onClick={handleClick}>detail</button>
+      <Button onClick={handleClick}>{trans.details}</Button>
     </AlbumWrapper>
   );
 };

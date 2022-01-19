@@ -1,0 +1,1 @@
+export const getSliceAlbums = (state) => state.albums;

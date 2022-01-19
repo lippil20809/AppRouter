@@ -1,10 +1,11 @@
-import React from 'react';
-
+import React , {useEffect} from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import styled from 'styled-components';
-
-import { getPhotos } from '../../api/photos';
+import * as Statuses from "../../store/statuses";
+import {getSlicePhotos,getPhotos} from '../../store/photos'
+//import { getPhotos } from '../../api/photos';
 import Photo from '../../components/Photo/Photo';
-import useRequest from '../../hooks/useRequest';
+//import useRequest from '../../hooks/useRequest';
 
 const PhotosWrapper = styled('section')`
   display: flex;
@@ -18,13 +19,18 @@ const PhotosWrapper = styled('section')`
 `;
 
 const Photos = () => {
-  const { data: photos, loading, error } = useRequest(getPhotos);
+  const dispatch = useDispatch();
+  const { photos, photosRequestStatus } = useSelector(getSlicePhotos);
+
+  useEffect(() => {
+    dispatch(getPhotos());
+  }, [dispatch]);
 
   return (
     <PhotosWrapper>
-      {loading && 'loading...'}
-      {error && 'some error...'}
-      {!loading && !error && photos && photos.map(photo => <Photo key={photo.id} {...photo} />)}
+      {photosRequestStatus === Statuses.PENDING && "loading..."}
+      {photosRequestStatus === Statuses.FAILURE && "some error..."}
+      {photos.map(photo => <Photo key={photo.id} {...photo} />)}
     </PhotosWrapper>
   );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
-
+import Button from '../Button';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useLocales } from "../../providers/LocalesProvider";
 import ErrorInterceptor from '../../hocs/ErrorInterceptor';
 
 const PhotoWrapper = styled('div')`
@@ -13,6 +14,7 @@ const PhotoWrapper = styled('div')`
   box-sizing: border-box;
   padding: 8px;
   margin: 4px;
+  color: ${(props) => props.theme.color.main};
 
   > h6 {
     font-size: 16px;
@@ -36,7 +38,7 @@ const PhotoWrapper = styled('div')`
 
 const Photo = ({ id, title, url }) => {
   const navigate = useNavigate();
-
+  const {trans} = useLocales()
   const handleClick = () => {
     navigate(`/photos/${id}`);
   };
@@ -44,8 +46,8 @@ const Photo = ({ id, title, url }) => {
   return (
     <PhotoWrapper>
       <h6>{title}</h6>
-      <img src={url} />
-      <button onClick={handleClick}>detail</button>
+      <img src={url} alt='' />
+      <Button onClick={handleClick}>{trans.details}</Button>
     </PhotoWrapper>
   );
 };
