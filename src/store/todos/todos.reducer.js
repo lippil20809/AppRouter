@@ -8,7 +8,7 @@ import {
   SET_TODO_REQUEST_STATUS_PENDING,
 } from './todos.actions';
 
-const initialState = {
+export const initialState = {
   todosRequestStatus: Statuses.UNCALLED,
   todoRequestStatus: Statuses.UNCALLED,
   todos: [],

@@ -37,7 +37,7 @@ const UserDetail = () => {
     if (params.id) {
       dispatch(getUser(params.id));
     }
-    if (!user?.userId) return Promise.resolve();
+    if (user?.userId) 
     {
       dispatch(getAlbum(user?.userId));
     }

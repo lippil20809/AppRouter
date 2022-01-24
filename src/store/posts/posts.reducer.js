@@ -11,7 +11,7 @@ import {
     SET_POST_COMMENTS_REQUEST_STATUS_PENDING
   } from "./posts.actions";
   
-  const initialState = {
+  export const initialState = {
     postsRequestStatus: Statuses.UNCALLED,
     postRequestStatus: Statuses.UNCALLED,
     commentsRequestStatus: Statuses.UNCALLED,

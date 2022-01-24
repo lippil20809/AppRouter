@@ -37,9 +37,8 @@ const AlbumDetail = () => {
     if (params.id) {
       dispatch(getAlbum(params.id));
     }
-    if (!album?.userId) return Promise.resolve();
-    {
-      dispatch(getPhoto(album?.userId));
+    if (album?.userId) {
+      dispatch(getPhoto(album.userId));
     }
   }, [dispatch, params.id, album?.userId]);
 

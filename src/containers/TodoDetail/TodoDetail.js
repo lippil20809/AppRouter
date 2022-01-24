@@ -39,9 +39,9 @@ const TodoDetail = () => {
     if (params.id) {
       dispatch(getTodo(params.id));
     }
-    if (!todo?.userId) return Promise.resolve();
+    if (todo?.userId) 
     {
-      dispatch(getUser(todo?.userId));
+      dispatch(getUser(todo.userId));
     }
   }, [dispatch, params.id,todo?.userId]);
 

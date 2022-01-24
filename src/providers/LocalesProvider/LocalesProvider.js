@@ -1,23 +1,25 @@
-import React, {createContext,useContext,useState,useCallback } from 'react'
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
 import { langs } from './translation';
 
-export const LocalesContext = createContext({})
 
-export const useLocales = () => useContext(LocalesContext)
+export const LocalesContext = createContext({});
 
-function LocalesProvider({children}) {
+export const useLocales = () => useContext(LocalesContext);
 
-    const [lang,setLang] = useState('en')
+function LocalesProvider({ children }) {
 
-    const toggleLang = useCallback(() => {
-        setLang((prev) => (prev === "en" ? "ru" : "en"));
-      }, []);
+  let langLocalStorage = JSON.parse(localStorage.getItem('lang') );
 
-    return (
-        <LocalesContext.Provider value={{ trans: langs[lang], toggleLang }}>
-            {children}
-        </LocalesContext.Provider>
-    )
+  const [lang, setLang] = useState(langLocalStorage);
+
+  useEffect(() => {
+    localStorage.setItem('lang', JSON.stringify(lang));
+  }, [lang]);
+
+  const toggleLang = useCallback(() => {
+    setLang(prev => (prev === 'en' ? 'ru' : 'en'));
+  }, []);
+  return <LocalesContext.Provider value={{ trans: langs[lang], toggleLang }}>{children}</LocalesContext.Provider>;
 }
 
-export default LocalesProvider
+export default LocalesProvider;

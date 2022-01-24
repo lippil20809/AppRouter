@@ -1,10 +1,11 @@
-import React, { useState, useCallback, createContext, useContext } from "react";
+import React, { useState, useCallback, createContext, useContext, useEffect } from "react";
 import {
   ThemeProvider as StyledThemeProvider,
   createGlobalStyle,
 } from "styled-components";
 
 import { lightTheme, darkTheme } from "./constants";
+
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -16,12 +17,21 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+
+
+
 const ThemeContext = createContext({});
 
 export const useTheme = () => useContext(ThemeContext);
 
 const ThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState("light");
+  let themeThemeProvider = JSON.parse(localStorage.getItem('theme'))
+  const [theme, setTheme] = useState(themeThemeProvider);
+
+  useEffect(()=>{
+     localStorage.setItem('theme',JSON.stringify(theme))
+ },[theme])
+
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));

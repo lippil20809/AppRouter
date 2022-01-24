@@ -8,7 +8,7 @@ import {
     SET_ALBUMS_REQUEST_STATUS_PENDING
 } from './albums.actions'
 
-const initialState = {
+export const initialState = {
     albumsRequestStatus: Statuses.UNCALLED,
     albumRequestStatus: Statuses.UNCALLED,
     albums: [],

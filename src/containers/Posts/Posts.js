@@ -29,6 +29,7 @@ const PostsWrapper = styled('section')`
 const Posts = () => {
   const dispatch = useDispatch();
   const { posts, postsRequestStatus } = useSelector(getSlice);
+  
 
   useEffect(() => {
     dispatch(getPosts());

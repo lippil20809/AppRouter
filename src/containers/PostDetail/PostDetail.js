@@ -62,9 +62,9 @@ const PostDetail = () => {
       dispatch(getPost(params.id));
       dispatch(getComments(params.id));
     }
-    if (!post?.userId) return Promise.resolve();
+    if (post?.userId) 
     {
-      dispatch(getUser(post?.userId));
+      dispatch(getUser(post.userId));
     }
   }, [dispatch, params.id, post?.userId]);
 

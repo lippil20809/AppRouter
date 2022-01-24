@@ -8,7 +8,7 @@ import {
     SET_PHOTOS_REQUEST_STATUS_PENDING
 } from './photos.actions'
 
-const initialState = {
+export const initialState = {
     photosRequestStatus: Statuses.UNCALLED,
     photoRequestStatus: Statuses.UNCALLED,
     photos: [],

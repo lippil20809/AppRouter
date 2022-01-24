@@ -8,7 +8,7 @@ import {
     SET_USERS_REQUEST_STATUS_FAILURE
 } from './users.actions'
 
-const initialState = {
+export const initialState = {
     usersRequestStatus: Statuses.UNCALLED,
     userRequestStatus: Statuses.UNCALLED,
     users: [],
